@@ -36,7 +36,7 @@ window.Selector = function(path, context) {
 			
 			// Loop through all passed elements
 			for(var i = 0; i < elements.length; i++) {
-				if(classRegexp.test(elements[i].className)) {
+				if((not) ? !classRegexp.test(elements[i].className) : classRegexp.test(elements[i].className)) {
 					filtered.push(elements[i]);
 				}
 			}
