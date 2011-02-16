@@ -78,4 +78,7 @@ window.Selector = function(path, context) {
 			return filtered;
 		}
 	};
+	
+	// Grab all elements
+	var elements = methods.all((context) ? context : document);
 };
