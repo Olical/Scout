@@ -1,67 +1,31 @@
+// Set up the object
 window.Selector = function(path, context) {
-	
+	// Set up the methods
+	var methods = {
+		all: function(context) {
+			// Check if we need to set the context
+			if(context === undefined) {
+				var context = document;
+			}
+			
+			// Return all elements
+			return context.all || context.getElementsByTagName('*');
+		},
+		filterTag: function(elements, tag, not) {
+			// Set up the array to be returned
+			var filtered = new Array();
+			
+			// Loop through all passed elements
+			for(var i = 0; i < elements.length; i++) {
+				// Compare tags
+				if((not) ? elements[i].tagName != tag.toUpperCase() : elements[i].tagName == tag.toUpperCase()) {
+					// Push to the filtered array
+					 filtered.push(elements[i]); 
+				}
+			}
+			
+			// Return the filtered array
+			return filtered;
+		}
+	};
 };
-
-/*
-
-DOMNodes.prototype = {
-
-       ofTag: function(nm){
-
-         var newList = [];
-
-          for(var i=0, l=this.nodes.length; i<l; i++){
-
-         if( this.nodes[i].tagName == nm.toUpperCase() ){
-
-            newList.push(this.nodes[i]);
-
-       }
-
- }
-
- return new DOMNodes(newList);
-
- },
-
-  hasClass: function(clnm){
-
-      var newList = [];
-
-      var classRE = new RegExp("\\s?"+clnm+"\\s?");
-
-      for(var i=0, l=this.nodes.length; i<l; i++){
-
-      if( classRE.test(this.nodes[i].className) ){
-
-     newList.push(this.nodes[i]);
-
-     }
-
- }
-
-      return new DOMNodes(newList);
-
- },
-
-      withAttr: function(nm, val){
-
-      var newList = [];
-
-      for(var i=0, l=this.nodes.length; i<l; i++){
-
-     if( Selector.getAttr(this.nodes[i], nm) == val ){
-
-      newList.push(this.nodes[i]);
-
-     }
-
- }
-
-   return new DOMNodes(newList);
-
-  }
-
-};
-
-*/
