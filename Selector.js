@@ -1,13 +1,8 @@
 // Set up the object
-window.Selector = function() {
+window.Selector = function(path, context) {
 	// Set up the methods
 	var methods = {
 		all: function(context) {
-			// Check if we need to set the context
-			if(context === undefined) {
-				var context = document;
-			}
-			
 			// Return all elements
 			return context.all || context.getElementsByTagName('*');
 		},
@@ -83,6 +78,4 @@ window.Selector = function() {
 			return filtered;
 		}
 	};
-	
-	return methods;
 };
