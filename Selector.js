@@ -50,6 +50,22 @@ window.Selector = function(path, context) {
 			// Return the filtered array
 			return filtered;
 		},
+		filterId: function(elements, idName, not) {
+			// Set up array to be returned
+			var filtered = new Array();
+			
+			// Loop through all passed elements
+			for(var i = 0; i < elements.length; i++) {
+				// Compare ids
+				if((not) ? elements[i].id != idName : elements[i].id == idName) {
+					// Push to the filtered array
+					filtered.push(elements[i]);
+				}
+			}
+			
+			// Return the filtered array
+			return filtered;
+		},
 		filterAttribute: function(elements, attributeName, attributeValue, not){
 			// Set up array to be returned
 			var filtered = new Array();
