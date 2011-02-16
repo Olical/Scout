@@ -1,5 +1,5 @@
 // Set up the object
-window.Selector = function(path, context) {
+window.Selector = function() {
 	// Set up the methods
 	var methods = {
 		all: function(context) {
@@ -83,4 +83,6 @@ window.Selector = function(path, context) {
 			return filtered;
 		}
 	};
+	
+	return methods;
 };
