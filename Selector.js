@@ -35,7 +35,7 @@ window.Selector = function(path, context) {
 			var classRegexp = new RegExp("\\s?" + className + "\\s?");
 			
 			// Loop through all passed elements
-			for(var i = 0, i < elements; i++) {
+			for(var i = 0; i < elements.length; i++) {
 				if(classRegexp.test(elements[i].className)) {
 					filtered.push(elements[i]);
 				}
