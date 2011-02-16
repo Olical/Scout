@@ -81,4 +81,7 @@ window.Selector = function(path, context) {
 	
 	// Grab all elements
 	var elements = methods.all((context) ? context : document);
+	
+	// Return the filtered list
+	return elements;
 };
