@@ -6,13 +6,30 @@ window.Scout = function(selector, context) {
 			// Return all elements
 			return context.all || context.getElementsByTagName('*');
 		},
+		unique: function(arrayName) {
+			var newArray = new Array();
+			label: for(var i = 0; i < arrayName.length; i++) {  
+				for(var j = 0; j < newArray.length; j++) {
+					if(newArray[j] == arrayName[i]) {
+						continue label;
+					}
+				}
+				newArray[newArray.length] = arrayName[i];
+			}
+			return newArray;
+		},
 		getChildren: function(elements) {
-			// Set up array to return
+			// Set up variables
 			var children = new Array();
+			var search = null;
 			
 			// Loop through the elements gathering their children
 			for(var i = 0; i < elements.length; i++) {
-				children = children.concat(elements[i].childNodes);
+				search = elements[i].getElementsByTagName('*');
+				
+				for(var e = 0; e < search.length; e++) {
+					children.push(search[e]);
+				}
 			}
 			
 			// Return the array
@@ -22,25 +39,19 @@ window.Scout = function(selector, context) {
 			var attr = e.attributes.getNamedItem(name);
 			return attr && attr.value;
 		},
-		filterTag: function(elements, tagName, children) {
+		filterTag: function(elements, tagName) {
 			// Set up the array to be returned
 			var filtered = new Array();
+			
+			// Grab the children
+			elements = this.getChildren(elements);
 			
 			// Loop through all passed elements
 			for(var i = 0; i < elements.length; i++) {
 				// Compare tags if we are not using children
-				if(elements[i].tagName == tagName.toUpperCase() && children === 0) {
+				if(elements[i].tagName == tagName.toUpperCase()) {
 					// Push to the filtered array
 					filtered.push(elements[i]); 
-				}
-				else {
-					// Loop through all children
-					for(var c = 0; c < elements[i].childNodes.length; c++) {
-						if(elements[i].childNodes[c].tagName == tagName.toUpperCase() && children > 0) {
-							// Push the children
-							filtered.push(elements[i].childNodes[c]);
-						}
-					}
 				}
 			}
 			
@@ -132,7 +143,7 @@ window.Scout = function(selector, context) {
 			if(filter.match(/([a-z]+|\*)/ig)) {
 				// Filter tags if is not an astrix
 				if(filter != '*') {
-					toFilter = methods.filterTag(toFilter, filter, y);
+					toFilter = methods.filterTag(toFilter, filter);
 				}
 				else {
 					toFilter = methods.getChildren(toFilter);
@@ -145,5 +156,5 @@ window.Scout = function(selector, context) {
 	}
 	
 	// Return found elements
-	return found;
+	return methods.unique(found);
 };
