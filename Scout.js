@@ -152,7 +152,7 @@ window.Scout = function(selector, context) {
 			if(filter.match(/([a-z]+|\*)/i)) {
 				// Filter tags if is not an astrix
 				if(filter != '*') {
-					toFilter = methods.filterTag(toFilter, filter);
+					toFilter = methods.filterTag(toFilter, filter.replace(/([a-z]+|\*).*/i, '$1'));
 				}
 				else {
 					// If it is an astrix and we are not on the first iteration
