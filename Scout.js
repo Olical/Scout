@@ -149,10 +149,10 @@ window.Scout = function(selector, context) {
 			// Grab the current filter
 			filter = selectors[x][y];
 			
-			if(filter.match(/([a-z]+|\*)/i)) {
+			if(filter.match(/^([a-z]+|\*)/i)) {
 				// Filter tags if is not an astrix
 				if(filter != '*') {
-					toFilter = methods.filterTag(toFilter, filter.replace(/([a-z]+|\*).*/i, '$1'));
+					toFilter = methods.filterTag(toFilter, filter.replace(/^([a-z]+|\*).*/i, '$1'));
 				}
 				else {
 					// If it is an astrix and we are not on the first iteration
@@ -162,6 +162,7 @@ window.Scout = function(selector, context) {
 					}
 				}
 			}
+			
 		}
 		
 		// Merge the filtered list into the final list
