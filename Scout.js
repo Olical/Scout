@@ -1,3 +1,12 @@
+/*!
+ * Scout selector engine v1.0.0
+ * http://flowdev.co.uk/
+ * 
+ * Copyright 2011, Oliver Caldwell
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * https://github.com/Wolfy87/Scout
+ */
+
 // Set up the object
 window.Scout = function(selector, context) {
 	// Set up the methods
