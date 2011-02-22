@@ -108,9 +108,11 @@ window.Scout = function(selector, context) {
 			// Grab the current filter
 			filter = selectors[x][y];
 			
-			if(filter.match(/([a-z]+|\*)/i)) {
+			if(filter.match(/([a-z]+|\*)/ig)) {
 				// Filter tags if is not an astrix
-				if(filter != '*') toFilter = methods.filterTag(toFilter, filter);
+				if(filter != '*') {
+					toFilter = methods.filterTag(toFilter, filter);
+				}
 			}
 		}
 		
