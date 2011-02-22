@@ -79,9 +79,20 @@ window.Scout = function(selector, context) {
 		}
 	};
 	
-	// Set up any required variables
+	// Set up the array to be returned
 	var found = new Array();
 	
-	// Return the filtered list
+	// Split the selectors
+	var splitSelector = selector.split(/\s*,\s*/ig);
+	
+	// Set up the array for the split selectors
+	var selectors = Array();
+	
+	// Split the individual selectors
+	for(var i = 0; i < splitSelector.length; i++) {
+		selectors.push(splitSelector[i].split(/\s+/ig));
+	}
+	
+	// Return found elements
 	return found;
 };
