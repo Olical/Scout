@@ -107,6 +107,11 @@ window.Scout = function(selector, context) {
 		for(var y = 0; y < selectors[x].length; y++) {
 			// Grab the current filter
 			filter = selectors[x][y];
+			
+			if(filter.match(/([a-z]+|\*)/i)) {
+				// Filter tags
+				toFilter = methods.filterTag(toFilter, filter);
+			}
 		}
 		
 		// Merge the filtered list into the final list
