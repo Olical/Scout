@@ -79,9 +79,9 @@ window.Scout = function(selector, context) {
 		}
 	};
 	
-	// Grab all elements
-	var elements = methods.all((context) ? context : document);
+	// Set up any required variables
+	var found = new Array();
 	
 	// Return the filtered list
-	return elements;
+	return found;
 };
