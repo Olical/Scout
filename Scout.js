@@ -25,7 +25,7 @@ window.Scout = function(selector, context) {
 			
 			// Loop through the elements gathering their children
 			for(var i = 0; i < elements.length; i++) {
-				search = elements[i].getElementsByTagName('*');
+				search = this.all(elements[i]);
 				
 				for(var e = 0; e < search.length; e++) {
 					children.push(search[e]);
