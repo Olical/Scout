@@ -107,6 +107,8 @@ window.Scout = function(selector, context) {
 		for(var y = 0; y < selectors[x].length; y++) {
 			filter = selectors[x][y];
 		}
+		
+		found = found.concat(toFilter);
 	}
 	
 	// Return found elements
