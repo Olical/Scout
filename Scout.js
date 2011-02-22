@@ -6,6 +6,18 @@ window.Scout = function(selector, context) {
 			// Return all elements
 			return context.all || context.getElementsByTagName('*');
 		},
+		getChildren: function(elements) {
+			// Set up array to return
+			var children = new Array();
+			
+			// Loop through the elements gathering their children
+			for(var i = 0; i < elements.length; i++) {
+				children = children.concat(elements[i].childNodes);
+			}
+			
+			// Return the array
+			return children;
+		},
 		attribute: function(e, name){
 			var attr = e.attributes.getNamedItem(name);
 			return attr && attr.value;
@@ -121,6 +133,9 @@ window.Scout = function(selector, context) {
 				// Filter tags if is not an astrix
 				if(filter != '*') {
 					toFilter = methods.filterTag(toFilter, filter, y);
+				}
+				else {
+					toFilter = methods.getChildren(toFilter);
 				}
 			}
 		}
