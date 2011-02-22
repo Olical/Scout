@@ -105,9 +105,11 @@ window.Scout = function(selector, context) {
 		// Loop through the slightly lower selectors
 		// Filtering as it goes
 		for(var y = 0; y < selectors[x].length; y++) {
+			// Grab the current filter
 			filter = selectors[x][y];
 		}
 		
+		// Merge the filtered list into the final list
 		found = found.concat(toFilter);
 	}
 	
