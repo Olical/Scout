@@ -145,6 +145,13 @@ window.Scout = function(selector, context) {
 				if(filter != '*') {
 					toFilter = methods.filterTag(toFilter, filter);
 				}
+				else {
+					// If it is an astrix and we are not on the first iteration
+					if(y > 0) {
+						// Get all children
+						toFilter = methods.getChildren(toFilter);
+					}
+				}
 			}
 		}
 		
