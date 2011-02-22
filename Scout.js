@@ -165,6 +165,10 @@ window.Scout = function(selector, context) {
 			
 			// Remove any element selectors
 			filter = filter.replace(/^([a-z]+|\*)/i, '');
+			
+			if(filter.match(/\[([a-z]+)\]/i)) {
+				// Filter by the ownership of a specified attribute
+			}
 		}
 		
 		// Merge the filtered list into the final list
