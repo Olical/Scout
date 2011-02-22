@@ -12,8 +12,17 @@ window.Scout = function(selector, context) {
 	// Set up the methods
 	var methods = {
 		all: function(context) {
+			// Set up variables
+			var elements = context.all || context.getElementsByTagName('*');
+			var elementsArray = new Array();
+			
+			// Loop through pushing the elements into the array
+			for(var i = 0; i < elements.length; i++) {
+				elementsArray.push(elements[i]);
+			}
+			
 			// Return all elements
-			return context.all || context.getElementsByTagName('*');
+			return elementsArray;
 		},
 		unique: function(arrayName) {
 			var newArray = new Array();
