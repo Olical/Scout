@@ -109,7 +109,7 @@ window.Scout = function(selector, context) {
 			// Loop through all passed elements
 			for(var i = 0; i < elements.length; i++){
 				// Compare attributes
-				if(this.attribute(elements[i], attributeName) == (attributeValue) ? attributeValue : null) {
+				if(this.attribute(elements[i], attributeName) == (attributeValue) ? attributeValue : true) {
 					// Push to the filtered array
 					filtered.push(elements[i]);
 				}
@@ -168,6 +168,7 @@ window.Scout = function(selector, context) {
 			
 			if(filter.match(/\[([a-z]+)\]/i)) {
 				// Filter by the ownership of a specified attribute
+				toFilter = methods.filterAttribute(toFilter, filter.replace(/\[([a-z]+)\]/i, '$1'));
 			}
 		}
 		
