@@ -10,14 +10,14 @@ window.Scout = function(selector, context) {
 			var attr = e.attributes.getNamedItem(name);
 			return attr && attr.value;
 		},
-		filterTag: function(elements, tagName, not) {
+		filterTag: function(elements, tagName) {
 			// Set up the array to be returned
 			var filtered = new Array();
 			
 			// Loop through all passed elements
 			for(var i = 0; i < elements.length; i++) {
 				// Compare tags
-				if((not) ? elements[i].tagName != tagName.toUpperCase() : elements[i].tagName == tagName.toUpperCase()) {
+				if(elements[i].tagName == tagName.toUpperCase()) {
 					// Push to the filtered array
 					 filtered.push(elements[i]); 
 				}
@@ -26,7 +26,7 @@ window.Scout = function(selector, context) {
 			// Return the filtered array
 			return filtered;
 		},
-		filterClass: function(elements, className, not) {
+		filterClass: function(elements, className) {
 			// Set up array to be returned
 			var filtered = new Array();
 			
@@ -36,7 +36,7 @@ window.Scout = function(selector, context) {
 			// Loop through all passed elements
 			for(var i = 0; i < elements.length; i++) {
 				// Compare classes
-				if((not) ? !classRegexp.test(elements[i].className) : classRegexp.test(elements[i].className)) {
+				if(classRegexp.test(elements[i].className)) {
 					// Push to the filtered array
 					filtered.push(elements[i]);
 				}
@@ -45,14 +45,14 @@ window.Scout = function(selector, context) {
 			// Return the filtered array
 			return filtered;
 		},
-		filterId: function(elements, idName, not) {
+		filterId: function(elements, idName) {
 			// Set up array to be returned
 			var filtered = new Array();
 			
 			// Loop through all passed elements
 			for(var i = 0; i < elements.length; i++) {
 				// Compare ids
-				if((not) ? elements[i].id != idName : elements[i].id == idName) {
+				if(elements[i].id == idName) {
 					// Push to the filtered array
 					filtered.push(elements[i]);
 				}
@@ -61,14 +61,14 @@ window.Scout = function(selector, context) {
 			// Return the filtered array
 			return filtered;
 		},
-		filterAttribute: function(elements, attributeName, attributeValue, not){
+		filterAttribute: function(elements, attributeName, attributeValue){
 			// Set up array to be returned
 			var filtered = new Array();
 			
 			// Loop through all passed elements
 			for(var i = 0; i < elements.length; i++){
 				// Compare attributes
-				if((not) ? this.attribute(elements[i], attributeName) != attributeValue : this.attribute(elements[i], attributeName) == attributeValue) {
+				if(this.attribute(elements[i], attributeName) == attributeValue) {
 					// Push to the filtered array
 					filtered.push(elements[i]);
 				}
