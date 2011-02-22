@@ -2,6 +2,18 @@
 window.Scout = function(selector, context) {
 	// Set up the methods
 	var methods = {
+		getChildren: function(elements) {
+			// Set up array to return
+			var children = new Array();
+			
+			// Loop through the elements gathering their children
+			for(var i = 0; i < elements.length; i++) {
+				children = children.concat(elements[i].childNodes);
+			}
+			
+			// Return the array
+			return children;
+		},
 		all: function(context) {
 			// Return all elements
 			return context.all || context.getElementsByTagName('*');
