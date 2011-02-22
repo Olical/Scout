@@ -110,7 +110,7 @@ window.Scout = function(selector, context) {
 			
 			if(filter.match(/([a-z]+|\*)/i)) {
 				// Filter tags
-				toFilter = methods.filterTag(toFilter, filter);
+				if(filter != '*') toFilter = methods.filterTag(toFilter, filter);
 			}
 		}
 		
