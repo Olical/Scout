@@ -93,6 +93,22 @@ window.Scout = function(selector, context) {
 		selectors.push(splitSelector[i].split(/\s+/ig));
 	}
 	
+	// Set up required variables
+	var filter = null;
+	var toFilter = null;
+	
+	// Loop through the top level selectors
+	for(var x = 0; x < selectors.length; x++) {
+		// Load all elements
+		toFilter = methods.all((context) ? context : document);
+		
+		// Loop through the slightly lower selectors
+		// Filtering as it goes
+		for(var y = 0; y < selectors[x].length; y++) {
+			filter = selectors[x][y];
+		}
+	}
+	
 	// Return found elements
 	return found;
 };
