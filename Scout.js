@@ -39,15 +39,10 @@ window.Scout = function(selector, context) {
 		getChildren: function(elements) {
 			// Set up variables
 			var children = new Array();
-			var search = null;
 			
 			// Loop through the elements gathering their children
 			for(var i = 0; i < elements.length; i++) {
-				search = this.all(elements[i]);
-				
-				for(var e = 0; e < search.length; e++) {
-					children.push(search[e]);
-				}
+				children = children.concat(this.all(elements[i]));
 			}
 			
 			// Return the array
