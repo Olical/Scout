@@ -149,26 +149,34 @@ window.Scout = function(selector, context) {
 			// Grab the current filter
 			filter = selectors[x][y];
 			
-			if(filter.match(/^([a-z]+|\*)/i)) {
-				// Filter tags if is not an astrix
-				if(filter != '*') {
-					toFilter = methods.filterTag(toFilter, filter.replace(/^([a-z]+|\*).*/i, '$1'));
+			while(filter.length > 0) {
+				if(filter.match(/^([a-z]+|\*)/i)) {
+					// Filter tags if is not an astrix
+					if(filter != '*') {
+						toFilter = methods.filterTag(toFilter, filter.replace(/^([a-z]+|\*).*/i, '$1'));
+					}
+					else {
+						// If it is an astrix and we are not on the first iteration
+						if(y > 0) {
+							// Get all children
+							toFilter = methods.getChildren(toFilter);
+						}
+					}
+					
+					// Remove this selector
+					filter = filter.replace(/^([a-z]+|\*)/i, '');
+				}
+				else if(filter.match(/^\[([a-z]+)\]/i)) {
+					// Filter by the ownership of a specified attribute
+					toFilter = methods.filterAttribute(toFilter, filter.replace(/^\[([a-z]+)\]/i, '$1'));
+					
+					// Remove this selector
+					filter = filter.replace(/^\[([a-z]+)\]/i, '');
 				}
 				else {
-					// If it is an astrix and we are not on the first iteration
-					if(y > 0) {
-						// Get all children
-						toFilter = methods.getChildren(toFilter);
-					}
+					// Stop endless loops
+					filter = '';
 				}
-			}
-			
-			// Remove any element selectors
-			filter = filter.replace(/^([a-z]+|\*)/i, '');
-			
-			if(filter.match(/\[([a-z]+)\]/i)) {
-				// Filter by the ownership of a specified attribute
-				toFilter = methods.filterAttribute(toFilter, filter.replace(/\[([a-z]+)\]/i, '$1'));
 			}
 		}
 		
