@@ -145,9 +145,6 @@ window.Scout = function(selector, context) {
 				if(filter != '*') {
 					toFilter = methods.filterTag(toFilter, filter);
 				}
-				else {
-					toFilter = methods.getChildren(toFilter);
-				}
 			}
 		}
 		
