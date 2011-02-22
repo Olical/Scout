@@ -1,5 +1,5 @@
 // Set up the object
-window.Scout = function(path, context) {
+window.Scout = function(selector, context) {
 	// Set up the methods
 	var methods = {
 		all: function(context) {
