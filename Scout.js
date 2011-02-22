@@ -163,6 +163,8 @@ window.Scout = function(selector, context) {
 				}
 			}
 			
+			// Remove any element selectors
+			filter = filter.replace(/^([a-z]+|\*)/i, '');
 		}
 		
 		// Merge the filtered list into the final list
