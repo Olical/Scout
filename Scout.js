@@ -31,7 +31,7 @@ window.Scout = function(selector, context) {
 				// Compare tags if we are not using children
 				if(elements[i].tagName == tagName.toUpperCase() && children === 0) {
 					// Push to the filtered array
-					 filtered.push(elements[i]); 
+					filtered.push(elements[i]); 
 				}
 				else {
 					// Loop through all children
