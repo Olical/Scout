@@ -123,7 +123,12 @@ window.Scout = function(selector, context) {
 			if(filter.match(/([a-z]+|\*)/ig)) {
 				// Filter tags if is not an astrix
 				if(filter != '*') {
-					toFilter = methods.filterTag(toFilter, filter);
+					if(y == 0) {
+						toFilter = methods.filterTag(toFilter, filter);
+					}
+					else {
+						toFilter = methods.filterTag(methods.getChildren(toFilter), filter);
+					}
 				}
 			}
 		}
