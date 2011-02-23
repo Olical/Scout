@@ -1,4 +1,4 @@
-**A lightweight CSS3 JavaScript selector engine**
+**A lightweight CSS2 JavaScript selector engine**
 
 Built mainly for the [Spark JavaScript library](http://sparkjs.co.uk/) but you can use it for what you want.
 
