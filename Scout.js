@@ -102,28 +102,25 @@ window.Scout = function(selector, context) {
 			// Return the filtered array
 			return filtered;
 		},
-		modify: function(original, type) {
-			// Check if we need to convert to space seperated
+		compare: function(original, compare, type) {
 			if(type == 'whitespace') {
-				return original.replace(/(\s)/ig, '').replace(/(.)/ig, '$1 ').slice(0, -1);
+				// Convert to whitespace versions
+				original = original.replace(/(\s)/ig, '').replace(/(.)/ig, '$1 ').slice(0, -1);
+				compare = compare.replace(/(\s)/ig, '').replace(/(.)/ig, '$1 ').slice(0, -1);
 			}
-			// By default just return it normally
-			else {
-				return original;
-			}
+			
+			// Compare
+			return original == compare;
 		},
 		filterAttribute: function(elements, attributeName, attributeValue, type){
 			// Set up array to be returned
 			var filtered = new Array();
 			
-			// Modify the attributeValue
-			attributeValue = this.modify(attributeValue, type);
-			
 			// Loop through all passed elements
 			for(var i = 0; i < elements.length; i++) {
 				if(attributeValue) {
 					// Compare attributes
-					if(this.modify(elements[i][attributeName], type) == attributeValue) {
+					if(this.compare(attributeValue, elements[i][attributeName], type)) {
 						// Push to the filtered array
 						filtered.push(elements[i]);
 					}
