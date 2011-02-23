@@ -189,6 +189,13 @@ window.Scout = function(selector, context) {
 					// Remove this selector
 					filter = filter.replace(/^\[([a-z]+)=["'](.+?)["']\]/i, '');
 				}
+				else if(filter.match(/^\.(-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/i)) {
+					// Filter by class
+					toFilter = methods.filterClass(toFilter, filter.replace(/^\.(-?[_a-zA-Z]+[_a-zA-Z0-9-]*).*/i, '$1'));
+					
+					// Remove this selector
+					filter = filter.replace(/^\.(-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/i, '');
+				}
 				else {
 					// Stop endless loops
 					filter = '';
