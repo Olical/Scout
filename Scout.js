@@ -48,7 +48,7 @@ window.Scout = function(selector, context) {
 			// Return the array
 			return children;
 		},
-		filterTag: function(elements, tagName) {
+		filterTag: function(elements, tagName, firstChild) {
 			// Set up the array to be returned
 			var filtered = new Array();
 			
@@ -59,8 +59,16 @@ window.Scout = function(selector, context) {
 			for(var i = 0; i < elements.length; i++) {
 				// Compare tags if we are not using children
 				if(elements[i].nodeName == tagName.toUpperCase()) {
-					// Push to the filtered array
-					filtered.push(elements[i]); 
+					if(firstChild) {
+						if(elements[i].parentNode.firstChild == elements[i]) {
+							// Push to the filtered array
+							filtered.push(elements[i]);
+						}
+					}
+					else {
+						// Push to the filtered array
+						filtered.push(elements[i]);
+					}
 				}
 			}
 			
@@ -176,7 +184,14 @@ window.Scout = function(selector, context) {
 			filter = selectors[x][y];
 			
 			while(filter.length > 0) {
-				if(filter.match(/^([a-z]+|\*)/i)) {
+				if(filter.match(/^([a-z]+):first-child/i)) {
+					// Filter tags that are a first child
+					toFilter = methods.filterTag(toFilter, filter.replace(/^([a-z]+):first-child.*/i, '$1'), true);
+					
+					// Remove this selector
+					filter = filter.replace(/^([a-z]+):first-child/i, '');
+				}
+				else if(filter.match(/^([a-z]+|\*)/i)) {
 					// Filter tags if is not an astrix
 					if(filter != '*') {
 						toFilter = methods.filterTag(toFilter, filter.replace(/^([a-z]+|\*).*/i, '$1'));
