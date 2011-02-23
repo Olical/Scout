@@ -120,7 +120,8 @@ window.Scout = function(selector, context) {
 				return (compare.indexOf(original) !== -1) ? compare.indexOf(original) === compare.length - original.length : false;
 			}
 			else if(type == 'contain') {
-				
+				// Search for the substring
+				return (compare.indexOf(original) !== -1) ? true : false;
 			}
 		},
 		filterAttribute: function(elements, attributeName, attributeValue, type) {
@@ -230,6 +231,13 @@ window.Scout = function(selector, context) {
 					
 					// Remove this selector
 					filter = filter.replace(/^\[([a-z]+)\$=["'](.+?)["']\]/i, '');
+				}
+				else if(filter.match(/^\[([a-z]+)\*=["'](.+?)["']\]/i)) {
+					// Filter by attribute that contains
+					toFilter = methods.filterAttribute(toFilter, filter.replace(/^\[([a-z]+)\*=["'](.+?)["']\].*/i, '$1'), filter.replace(/^\[([a-z]+)\*=["'](.+?)["']\].*/i, '$2'), 'contain');
+					
+					// Remove this selector
+					filter = filter.replace(/^\[([a-z]+)\*=["'](.+?)["']\]/i, '');
 				}
 				else if(filter.match(/^\.(-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/i)) {
 					// Filter by class
