@@ -116,7 +116,7 @@ window.Scout = function(selector, context) {
 				return compare.indexOf(original) === 0;
 			}
 		},
-		filterAttribute: function(elements, attributeName, attributeValue, type){
+		filterAttribute: function(elements, attributeName, attributeValue, type) {
 			// Set up array to be returned
 			var filtered = new Array();
 			
