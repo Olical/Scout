@@ -102,15 +102,28 @@ window.Scout = function(selector, context) {
 			// Return the filtered array
 			return filtered;
 		},
-		filterAttribute: function(elements, attributeName, attributeValue){
+		modify: function(original, type) {
+			// Check if we need to convert to space seperated
+			if(type == 'whitespace') {
+				return original.replace(/(\s)/ig, '').replace(/(.)/ig, '$1 ').slice(0, -1);
+			}
+			// By default just return it normally
+			else {
+				return original;
+			}
+		},
+		filterAttribute: function(elements, attributeName, attributeValue, type){
 			// Set up array to be returned
 			var filtered = new Array();
+			
+			// Modify the attributeValue
+			attributeValue = this.modify(attributeValue, type);
 			
 			// Loop through all passed elements
 			for(var i = 0; i < elements.length; i++) {
 				if(attributeValue) {
 					// Compare attributes
-					if(elements[i][attributeName] == attributeValue) {
+					if(this.modify(elements[i][attributeName], type) == attributeValue) {
 						// Push to the filtered array
 						filtered.push(elements[i]);
 					}
@@ -188,6 +201,13 @@ window.Scout = function(selector, context) {
 					
 					// Remove this selector
 					filter = filter.replace(/^\[([a-z]+)=["'](.+?)["']\]/i, '');
+				}
+				else if(filter.match(/^\[([a-z]+)~=["'](.+?)["']\]/i)) {
+					// Filter by attribute whitespace seperated
+					toFilter = methods.filterAttribute(toFilter, filter.replace(/^\[([a-z]+)~=["'](.+?)["']\].*/i, '$1'), filter.replace(/^\[([a-z]+)~=["'](.+?)["']\].*/i, '$2'), 'whitespace');
+					
+					// Remove this selector
+					filter = filter.replace(/^\[([a-z]+)~=["'](.+?)["']\]/i, '');
 				}
 				else if(filter.match(/^\.(-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/i)) {
 					// Filter by class
