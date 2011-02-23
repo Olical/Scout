@@ -111,7 +111,7 @@ window.Scout = function(selector, context) {
 			var filtered = new Array();
 			
 			// Loop through all passed elements
-			for(var i = 0; i < elements.length; i++){
+			for(var i = 0; i < elements.length; i++) {
 				// Compare attributes
 				if(this.attribute(elements[i], attributeName) == (attributeValue) ? attributeValue : true) {
 					// Push to the filtered array
