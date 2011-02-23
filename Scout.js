@@ -116,8 +116,11 @@ window.Scout = function(selector, context) {
 				return compare.indexOf(original) === 0;
 			}
 			else if(type == 'end') {
-				// Compare the starts
+				// Compare the ends
 				return (compare.indexOf(original) !== -1) ? compare.indexOf(original) === compare.length - original.length : false;
+			}
+			else if(type == 'contain') {
+				
 			}
 		},
 		filterAttribute: function(elements, attributeName, attributeValue, type) {
