@@ -196,6 +196,13 @@ window.Scout = function(selector, context) {
 					// Remove this selector
 					filter = filter.replace(/^\.(-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/i, '');
 				}
+				else if(filter.match(/^#([A-Za-z][-A-Za-z0-9_:.]*)/i)) {
+					// Filter by id
+					toFilter = methods.filterId(toFilter, filter.replace(/^#([A-Za-z][-A-Za-z0-9_:.]*).*/i, '$1'));
+					
+					// Remove this selector
+					filter = filter.replace(/^#([A-Za-z][-A-Za-z0-9_:.]*)/i, '');
+				}
 				else {
 					// Stop endless loops
 					filter = '';
