@@ -60,7 +60,7 @@ window.Scout = function(selector, context) {
 				// Compare tags if we are not using children
 				if(elements[i].nodeName == tagName.toUpperCase()) {
 					if(firstChild) {
-						if(elements[i].parentNode.firstChild == elements[i]) {
+						if(elements[i].parentNode.children[0] == elements[i]) {
 							// Push to the filtered array
 							filtered.push(elements[i]);
 						}
