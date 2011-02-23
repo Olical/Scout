@@ -112,10 +112,19 @@ window.Scout = function(selector, context) {
 			
 			// Loop through all passed elements
 			for(var i = 0; i < elements.length; i++) {
-				// Compare attributes
-				if(this.attribute(elements[i], attributeName) == ((attributeValue) ? attributeValue : true)) {
-					// Push to the filtered array
-					filtered.push(elements[i]);
+				if(attributeValue) {
+					// Compare attributes
+					if(this.attribute(elements[i], attributeName) == attributeValue) {
+						// Push to the filtered array
+						filtered.push(elements[i]);
+					}
+				}
+				else {
+					// Check for attributes attributes
+					if(this.attribute(elements[i], attributeName)) {
+						// Push to the filtered array
+						filtered.push(elements[i]);
+					}
 				}
 			}
 			
