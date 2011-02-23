@@ -172,7 +172,7 @@ window.Scout = function(selector, context) {
 				}
 				else if(filter.match(/^\[([a-z]+)\]/i)) {
 					// Filter by the ownership of a specified attribute
-					toFilter = methods.filterAttribute(toFilter, filter.replace(/^\[([a-z]+)\]/i, '$1'));
+					toFilter = methods.filterAttribute(toFilter, filter.replace(/^\[([a-z]+)\].*/i, '$1'));
 					
 					// Remove this selector
 					filter = filter.replace(/^\[([a-z]+)\]/i, '');
