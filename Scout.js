@@ -111,18 +111,6 @@ window.Scout = function(selector, context) {
 				// Compare
 				return original == compare;
 			}
-			else if(type == 'start') {
-				// Compare the starts
-				return compare.indexOf(original) === 0;
-			}
-			else if(type == 'end') {
-				// Compare the ends
-				return (compare.indexOf(original) !== -1) ? compare.indexOf(original) === compare.length - original.length : false;
-			}
-			else if(type == 'contain') {
-				// Search for the substring
-				return (compare.indexOf(original) !== -1) ? true : false;
-			}
 			else if(type == 'hyphen') {
 				// Convert to hyphen version
 				original = original.replace(/(\-)/ig, '').replace(/(.)/ig, '$1-').slice(0, -1);
@@ -226,33 +214,12 @@ window.Scout = function(selector, context) {
 					// Remove this selector
 					filter = filter.replace(/^\[([a-z]+)~=["'](.+?)["']\]/i, '');
 				}
-				else if(filter.match(/^\[([a-z]+)\^=["'](.+?)["']\]/i)) {
-					// Filter by attribute that begins with
-					toFilter = methods.filterAttribute(toFilter, filter.replace(/^\[([a-z]+)\^=["'](.+?)["']\].*/i, '$1'), filter.replace(/^\[([a-z]+)\^=["'](.+?)["']\].*/i, '$2'), 'start');
+				else if(filter.match(/^\[([a-z]+)\|=["'](.+?)["']\]/i)) {
+					// Filter by attribute hyphen seperated
+					toFilter = methods.filterAttribute(toFilter, filter.replace(/^\[([a-z]+)\|=["'](.+?)["']\].*/i, '$1'), filter.replace(/^\[([a-z]+)\|=["'](.+?)["']\].*/i, '$2'), 'hyphen');
 					
 					// Remove this selector
-					filter = filter.replace(/^\[([a-z]+)\^=["'](.+?)["']\]/i, '');
-				}
-				else if(filter.match(/^\[([a-z]+)\$=["'](.+?)["']\]/i)) {
-					// Filter by attribute that ends with
-					toFilter = methods.filterAttribute(toFilter, filter.replace(/^\[([a-z]+)\$=["'](.+?)["']\].*/i, '$1'), filter.replace(/^\[([a-z]+)\$=["'](.+?)["']\].*/i, '$2'), 'end');
-					
-					// Remove this selector
-					filter = filter.replace(/^\[([a-z]+)\$=["'](.+?)["']\]/i, '');
-				}
-				else if(filter.match(/^\[([a-z]+)\*=["'](.+?)["']\]/i)) {
-					// Filter by attribute that contains
-					toFilter = methods.filterAttribute(toFilter, filter.replace(/^\[([a-z]+)\*=["'](.+?)["']\].*/i, '$1'), filter.replace(/^\[([a-z]+)\*=["'](.+?)["']\].*/i, '$2'), 'contain');
-					
-					// Remove this selector
-					filter = filter.replace(/^\[([a-z]+)\*=["'](.+?)["']\]/i, '');
-				}
-				else if(filter.match(/^\[([a-z]+)\!=["'](.+?)["']\]/i)) {
-					// Filter by attribute that contains
-					toFilter = methods.filterAttribute(toFilter, filter.replace(/^\[([a-z]+)\!=["'](.+?)["']\].*/i, '$1'), filter.replace(/^\[([a-z]+)\!=["'](.+?)["']\].*/i, '$2'), 'hyphen');
-					
-					// Remove this selector
-					filter = filter.replace(/^\[([a-z]+)\!=["'](.+?)["']\]/i, '');
+					filter = filter.replace(/^\[([a-z]+)\|=["'](.+?)["']\]/i, '');
 				}
 				else if(filter.match(/^\.(-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/i)) {
 					// Filter by class
