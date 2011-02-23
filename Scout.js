@@ -111,9 +111,13 @@ window.Scout = function(selector, context) {
 				// Compare
 				return original == compare;
 			}
-			if(type == 'start') {
+			else if(type == 'start') {
 				// Compare the starts
 				return compare.indexOf(original) === 0;
+			}
+			else if(type == 'end') {
+				// Compare the starts
+				return (compare.indexOf(original) !== -1) ? compare.indexOf(original) === compare.length - original.length : false;
 			}
 		},
 		filterAttribute: function(elements, attributeName, attributeValue, type) {
@@ -216,6 +220,13 @@ window.Scout = function(selector, context) {
 					
 					// Remove this selector
 					filter = filter.replace(/^\[([a-z]+)\^=["'](.+?)["']\]/i, '');
+				}
+				else if(filter.match(/^\[([a-z]+)\$=["'](.+?)["']\]/i)) {
+					// Filter by attribute that ends with
+					toFilter = methods.filterAttribute(toFilter, filter.replace(/^\[([a-z]+)\$=["'](.+?)["']\].*/i, '$1'), filter.replace(/^\[([a-z]+)\$=["'](.+?)["']\].*/i, '$2'), 'end');
+					
+					// Remove this selector
+					filter = filter.replace(/^\[([a-z]+)\$=["'](.+?)["']\]/i, '');
 				}
 				else if(filter.match(/^\.(-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/i)) {
 					// Filter by class
