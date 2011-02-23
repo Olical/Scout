@@ -9,6 +9,12 @@
 
 // Set up the object
 window.Scout = function(selector, context) {
+	// Check if we can just use query selector
+	if(document.querySelectorAll) {
+		// Return the query selector search
+		return ((context) ? context : document).querySelectorAll(selector);
+	}
+	
 	// Set up the methods
 	var methods = {
 		all: function(context) {
