@@ -48,10 +48,6 @@ window.Scout = function(selector, context) {
 			// Return the array
 			return children;
 		},
-		attribute: function(e, name){
-			var attr = e.attributes.getNamedItem(name);
-			return attr && attr.value;
-		},
 		filterTag: function(elements, tagName) {
 			// Set up the array to be returned
 			var filtered = new Array();
