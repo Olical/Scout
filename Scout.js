@@ -113,7 +113,7 @@ window.Scout = function(selector, context) {
 			// Loop through all passed elements
 			for(var i = 0; i < elements.length; i++) {
 				// Compare attributes
-				if(this.attribute(elements[i], attributeName) == (attributeValue) ? attributeValue : true) {
+				if(this.attribute(elements[i], attributeName) === attributeValue) {
 					// Push to the filtered array
 					filtered.push(elements[i]);
 				}
@@ -176,6 +176,13 @@ window.Scout = function(selector, context) {
 					
 					// Remove this selector
 					filter = filter.replace(/^\[([a-z]+)\]/i, '');
+				}
+				else if(filter.match(/^\[([a-z]+)=["'](.+?)["']\]/i)) {
+					// Filter by attribute
+					toFilter = methods.filterAttribute(toFilter, filter.replace(/^\[([a-z]+)=["'](.+?)["']\].*/i, '$1'), filter.replace(/^\[([a-z]+)=["'](.+?)["']\].*/i, '$2'));
+					
+					// Remove this selector
+					filter = filter.replace(/^\[([a-z]+)=["'](.+?)["']\]/i, '');
 				}
 				else {
 					// Stop endless loops
