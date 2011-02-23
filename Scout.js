@@ -112,12 +112,11 @@ window.Scout = function(selector, context) {
 				return original == compare;
 			}
 			else if(type == 'hyphen') {
-				// Convert to hyphen version
-				original = original.replace(/(\-)/ig, '').replace(/(.)/ig, '$1-').slice(0, -1);
-				compare = compare.replace(/(\-)/ig, '').replace(/(.)/ig, '$1-').slice(0, -1);
+				// Remove everything after the hyphen
+				compare = compare.replace(/^(.*?)-.*/ig, '$1');
 				
-				// Compare
-				return original == compare;
+				// Check if compare contains original or is equal to original
+				return (compare == original) ? true : ((compare.indexOf(original) === 0) ? true : false);
 			}
 		},
 		filterAttribute: function(elements, attributeName, attributeValue, type) {
