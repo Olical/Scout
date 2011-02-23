@@ -48,27 +48,31 @@ window.Scout = function(selector, context) {
 			// Return the array
 			return children;
 		},
+		toArray: function(nonArr) {
+			var arr = new Array();
+			
+			for(var i = 0; i < nonArr.length; i++) {
+				arr.push(nonArr[i]);
+			}
+			
+			return arr;
+		},
 		filterTag: function(elements, tagName, firstChild) {
 			// Set up the array to be returned
 			var filtered = new Array();
 			
-			// Grab the children
-			elements = this.getChildren(elements);
-			
 			// Loop through all passed elements
 			for(var i = 0; i < elements.length; i++) {
-				// Compare tags if we are not using children
-				if(elements[i].nodeName == tagName.toUpperCase()) {
-					if(firstChild) {
-						if(elements[i].parentNode.children[0] == elements[i]) {
-							// Push to the filtered array
-							filtered.push(elements[i]);
-						}
-					}
-					else {
+				// Check if first child is true
+				if(firstChild) {
+					if(elements[i].parentNode.children[0] == elements[i]) {
 						// Push to the filtered array
-						filtered.push(elements[i]);
+						filtered = filtered.concat(this.toArray(elements[i].getElementsByTagName(tagName)));
 					}
+				}
+				else {
+					// Push to the filtered array
+					filtered = filtered.concat(this.toArray(elements[i].getElementsByTagName(tagName)));
 				}
 			}
 			
