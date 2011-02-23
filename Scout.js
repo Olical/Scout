@@ -123,6 +123,14 @@ window.Scout = function(selector, context) {
 				// Search for the substring
 				return (compare.indexOf(original) !== -1) ? true : false;
 			}
+			else if(type == 'hyphen') {
+				// Convert to hyphen version
+				original = original.replace(/(\-)/ig, '').replace(/(.)/ig, '$1-').slice(0, -1);
+				compare = compare.replace(/(\-)/ig, '').replace(/(.)/ig, '$1-').slice(0, -1);
+				
+				// Compare
+				return original == compare;
+			}
 		},
 		filterAttribute: function(elements, attributeName, attributeValue, type) {
 			// Set up array to be returned
@@ -238,6 +246,13 @@ window.Scout = function(selector, context) {
 					
 					// Remove this selector
 					filter = filter.replace(/^\[([a-z]+)\*=["'](.+?)["']\]/i, '');
+				}
+				else if(filter.match(/^\[([a-z]+)\!=["'](.+?)["']\]/i)) {
+					// Filter by attribute that contains
+					toFilter = methods.filterAttribute(toFilter, filter.replace(/^\[([a-z]+)\!=["'](.+?)["']\].*/i, '$1'), filter.replace(/^\[([a-z]+)\!=["'](.+?)["']\].*/i, '$2'), 'hyphen');
+					
+					// Remove this selector
+					filter = filter.replace(/^\[([a-z]+)\!=["'](.+?)["']\]/i, '');
 				}
 				else if(filter.match(/^\.(-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/i)) {
 					// Filter by class
