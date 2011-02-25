@@ -8,7 +8,7 @@
  */
 
 // Set up the object
-window.Scout = function(selector, context) {
+window.Scout = function(selector, context, useQSA) {
 	// Set up the methods
 	var methods = {
 		all: function(context) {
@@ -159,7 +159,7 @@ window.Scout = function(selector, context) {
 	};
 	
 	// Check if we can just use query selector
-	if(document.querySelectorAll) {
+	if(document.querySelectorAll && useQSA === undefined || useQSA === true) {
 		// Return the query selector search
 		return methods.toArray(((context) ? context : document).querySelectorAll(selector));
 	}
