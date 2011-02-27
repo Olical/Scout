@@ -297,6 +297,13 @@ window.Scout = function(selector, context, useQSA) {
 					// Remove this selector
 					filter = filter.replace(/^>/i, '');
 				}
+				else if(filter.match(/^\+/i)) {
+					// Set up for the next iteration to do a adjacent
+					checkAdjacent = toFilter;
+					
+					// Remove this selector
+					filter = filter.replace(/^\+/i, '');
+				}
 				else {
 					// Stop endless loops
 					filter = '';
