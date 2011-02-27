@@ -181,7 +181,7 @@ window.Scout = function(selector, context, useQSA) {
 	// Set up required variables
 	var filter = null;
 	var toFilter = null;
-	var checkChild = null;
+	var checkChild = false;
 	
 	// Loop through the top level selectors
 	for(var x = 0; x < selectors.length; x++) {
@@ -272,6 +272,11 @@ window.Scout = function(selector, context, useQSA) {
 					filter = '';
 				}
 			}
+		}
+		
+		// Check for checkChild
+		if(checkChild !== false) {
+			
 		}
 		
 		// Merge the filtered list into the final list
