@@ -73,14 +73,20 @@ window.Scout = function(selector, context, useQSA) {
 			// Return the filtered array
 			return filtered;
 		},
-		filterTag: function(elements, tagName) {
+		filterTag: function(elements, tagName, adjacent) {
 			// Set up the array to be returned
 			var filtered = new Array();
 			
 			// Loop through all passed elements
 			for(var i = 0; i < elements.length; i++) {
-				// Push to the filtered array
-				filtered = filtered.concat(this.toArray(elements[i].getElementsByTagName(tagName)));
+				if(!adjacent) {
+					// Push to the filtered array
+					filtered = filtered.concat(this.toArray(elements[i].getElementsByTagName(tagName)));
+				}
+				else {
+					// Push to the filtered array without going down a level
+					filtered = filtered.concat(this.toArray(elements[i].parentNode.getElementsByTagName(tagName)));
+				}
 			}
 			
 			// Return the filtered array
@@ -255,7 +261,12 @@ window.Scout = function(selector, context, useQSA) {
 				else if(filter.match(/^([a-z]+|\*)/i)) {
 					// Filter tags if is not an astrix
 					if(filter != '*') {
-						toFilter = methods.filterTag(toFilter, filter.replace(/^([a-z]+|\*).*/i, '$1'));
+						if(checkAdjacent === false) {
+							toFilter = methods.filterTag(toFilter, filter.replace(/^([a-z]+|\*).*/i, '$1'));
+						}
+						else {
+							toFilter = methods.filterTag(toFilter, filter.replace(/^([a-z]+|\*).*/i, '$1'), true);
+						}
 					}
 					else {
 						// If it is an astrix and we are not on the first iteration
