@@ -201,6 +201,10 @@ window.Scout = function(selector, context, useQSA) {
 	
 	// Split the individual selectors
 	for(var i = 0; i < splitSelector.length; i++) {
+		// Remove whitespace around the child selector
+		splitSelector[i] = splitSelector[i].replace(/\s+>\s+/ig, '>');
+		
+		// Split at whitespace
 		selectors.push(splitSelector[i].split(/\s+/ig));
 	}
 	
