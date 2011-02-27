@@ -1,5 +1,5 @@
 /*!
- * Scout selector engine v1.0.0
+ * Scout selector engine v1.1.0
  * http://flowdev.co.uk/
  * 
  * Copyright 2011, Oliver Caldwell
