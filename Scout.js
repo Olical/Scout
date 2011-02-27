@@ -212,6 +212,7 @@ window.Scout = function(selector, context, useQSA) {
 	var filter = null;
 	var toFilter = null;
 	var checkChild = false;
+	var checkAdjacent = false;
 	
 	// Loop through the top level selectors
 	for(var x = 0; x < selectors.length; x++) {
@@ -317,6 +318,15 @@ window.Scout = function(selector, context, useQSA) {
 				
 				// Reset the checkChild array
 				checkChild = false;
+			}
+			
+			// Check for checkAdjacent
+			if(checkAdjacent !== false) {
+				// Filter out non decendents
+				toFilter = methods.isAdjacent(toFilter, checkAdjacent);
+				
+				// Reset the checkChild array
+				checkAdjacent = false;
 			}
 		}
 		
