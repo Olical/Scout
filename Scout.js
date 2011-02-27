@@ -164,7 +164,23 @@ window.Scout = function(selector, context, useQSA) {
 			return filtered;
 		},
 		isChild: function(elements, parents) {
+			// Set up the array to be returned
+			var filtered = new Array();
 			
+			// Loop through all parents
+			for(var i = 0; i < parents.length; i++) {
+				// Loop through all potential children
+				for(var e = 0; e < elements.length; e++) {
+					// Check if the element is a child of the parent
+					if(elements[e].parentNode == parents[i]) {
+						// Push to the filtered array
+						filtered = filtered.concat(elements[e]);
+					}
+				}
+			}
+			
+			// Return the filtered array
+			return filtered;
 		}
 	};
 	
