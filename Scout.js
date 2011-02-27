@@ -282,7 +282,11 @@ window.Scout = function(selector, context, useQSA) {
 			
 			// Check for checkChild
 			if(checkChild !== false) {
+				// Filter out non decendents
+				toFilter = methods.isChild(toFilter, checkChild);
 				
+				// Reset the checkChild array
+				checkChild = false;
 			}
 		}
 		
