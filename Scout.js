@@ -57,23 +57,30 @@ window.Scout = function(selector, context, useQSA) {
 			
 			return arr;
 		},
-		filterTag: function(elements, tagName, firstChild) {
+		firstChildren: function(elements) {
 			// Set up the array to be returned
 			var filtered = new Array();
 			
 			// Loop through all passed elements
 			for(var i = 0; i < elements.length; i++) {
-				// Check if first child is true
-				if(firstChild) {
-					if(elements[i].parentNode.children[0] == elements[i]) {
-						// Push to the filtered array
-						filtered = filtered.concat(this.toArray(elements[i].getElementsByTagName(tagName)));
-					}
-				}
-				else {
+				// Check if the element is a direct decendent
+				if(elements[i].parentNode.children[0] == elements[i]) {
 					// Push to the filtered array
-					filtered = filtered.concat(this.toArray(elements[i].getElementsByTagName(tagName)));
+					filtered = filtered.concat(elements[i]);
 				}
+			}
+			
+			// Return the filtered array
+			return filtered;
+		},
+		filterTag: function(elements, tagName) {
+			// Set up the array to be returned
+			var filtered = new Array();
+			
+			// Loop through all passed elements
+			for(var i = 0; i < elements.length; i++) {
+				// Push to the filtered array
+				filtered = filtered.concat(this.toArray(elements[i].getElementsByTagName(tagName)));
 			}
 			
 			// Return the filtered array
@@ -195,12 +202,12 @@ window.Scout = function(selector, context, useQSA) {
 			filter = selectors[x][y];
 			
 			while(filter.length > 0) {
-				if(filter.match(/^([a-z]+):first-child/i)) {
+				if(filter.match(/^:first-child/i)) {
 					// Filter tags that are a first child
-					toFilter = methods.filterTag(toFilter, filter.replace(/^([a-z]+):first-child.*/i, '$1'), true);
+					toFilter = methods.firstChildren(toFilter);
 					
 					// Remove this selector
-					filter = filter.replace(/^([a-z]+):first-child/i, '');
+					filter = filter.replace(/^:first-child/i, '');
 				}
 				else if(filter.match(/^([a-z]+|\*)/i)) {
 					// Filter tags if is not an astrix
