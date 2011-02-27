@@ -163,7 +163,7 @@ window.Scout = function(selector, context, useQSA) {
 			// Return the filtered array
 			return filtered;
 		},
-		checkChild: function(elements, parents) {
+		isChild: function(elements, parents) {
 			
 		}
 	};
