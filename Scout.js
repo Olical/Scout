@@ -191,7 +191,7 @@ window.Scout = function(selector, context, useQSA) {
 				// Loop through all potential brothers
 				for(var e = 0; e < elements.length; e++) {
 					// Check if the element is a brother
-					if(elements[e].previousSibling == brothers[i]) {
+					if(brothers[i] == elements[e].previousSibling) {
 						// Push to the filtered array
 						filtered = filtered.concat(elements[e]);
 					}
