@@ -279,6 +279,11 @@ window.Scout = function(selector, context, useQSA) {
 					filter = '';
 				}
 			}
+			
+			// Check for checkChild
+			if(checkChild !== false) {
+				
+			}
 		}
 		
 		// Merge the filtered list into the final list
