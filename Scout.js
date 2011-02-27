@@ -181,6 +181,25 @@ window.Scout = function(selector, context, useQSA) {
 			
 			// Return the filtered array
 			return filtered;
+		},
+		isAdjacant: function(elements, brothers) {
+			// Set up the array to be returned
+			var filtered = new Array();
+			
+			// Loop through all parents
+			for(var i = 0; i < brothers.length; i++) {
+				// Loop through all potential brothers
+				for(var e = 0; e < elements.length; e++) {
+					// Check if the element is a brother
+					if(elements[e].previousSibling == brothers[i]) {
+						// Push to the filtered array
+						filtered = filtered.concat(elements[e]);
+					}
+				}
+			}
+			
+			// Return the filtered array
+			return filtered;
 		}
 	};
 	
@@ -323,7 +342,7 @@ window.Scout = function(selector, context, useQSA) {
 			// Check for checkAdjacent
 			if(checkAdjacent !== false) {
 				// Filter out non decendents
-				toFilter = methods.isAdjacent(toFilter, checkAdjacent);
+				toFilter = methods.isAdjacant(toFilter, checkAdjacent);
 				
 				// Reset the checkChild array
 				checkAdjacent = false;
