@@ -281,11 +281,6 @@ window.Scout = function(selector, context, useQSA) {
 			}
 		}
 		
-		// Check for checkChild
-		if(checkChild !== false) {
-			
-		}
-		
 		// Merge the filtered list into the final list
 		found = found.concat(toFilter);
 	}
