@@ -181,6 +181,7 @@ window.Scout = function(selector, context, useQSA) {
 	// Set up required variables
 	var filter = null;
 	var toFilter = null;
+	var checkChild = null;
 	
 	// Loop through the top level selectors
 	for(var x = 0; x < selectors.length; x++) {
@@ -258,6 +259,13 @@ window.Scout = function(selector, context, useQSA) {
 					
 					// Remove this selector
 					filter = filter.replace(/^#([A-Za-z]+[-A-Za-z0-9_:])/i, '');
+				}
+				else if(filter.match(/^>/i)) {
+					// Set up for the next iteration to do a child check
+					checkChild = toFilter;
+					
+					// Remove this selector
+					filter = filter.replace(/^>/i, '');
 				}
 				else {
 					// Stop endless loops
